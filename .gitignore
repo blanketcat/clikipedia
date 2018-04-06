@@ -1,0 +1,12 @@
+clikipedia-env/
+config/
+__pycache__/
+*.pyc
+*__pycache__*
+
+data/images/
+data/test/
+*.xml*
+*.bz2*
+*.gz*
+data/enwiki/*

@@ -9,11 +9,12 @@
 
 import sys
 from utils.scrape import *
+from bs4 import mapDOM
 
 
 def build_wiki_query():
 	"""
-		Build our query
+		Build wikipedia url
 	"""
 
 	## This should be moved to a global config file.
@@ -113,7 +114,7 @@ def main():
 
 	elif page_type(content) == 'Disambiguation':
 		for link in clean_disambiguation(content):
-			print link
+			print(link)
 
 	else:
 		print('We have no idea what went wrong, but you did not manage to fetch a valid page.')

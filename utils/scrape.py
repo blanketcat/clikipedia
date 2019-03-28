@@ -3,8 +3,8 @@
 import json, html, lxml, os, re, sys
 
 from lxml import etree
-from db.pg_utils import *
-from db.mongo_utils import *
+# from .db.pg_utils import *
+# from db.mongo_utils import *
 
 
 ## Make this shit dynamic as we're going to be iterating through many XML files.
@@ -32,6 +32,34 @@ class Page:
 		return """<Page (title='%s', text='%s', categories='%s')""" % (
 			self.title, self.text, ', '.join(self.categories)
 			)
+
+
+def build_wiki_query():
+	"""
+		Build wikipedia url
+	"""
+
+	## This should be moved to a global config file.
+	## It should take the parameters base_server, and query
+	## The query should be constructed with argparse and fed into here
+	## in main()
+	url = 'https://en.wikipedia.org/wiki/'
+	query = ''
+	
+
+	if len(sys.argv) > 1:
+		query = sys.argv[1].capitalize()
+
+	if len(sys.argv) > 2:
+		for arg in sys.argv[2:]:
+			if arg != ('the' or 'an' or 'and' or 'or' or 'in' or 'on'):
+				print(arg)
+				arg = arg.capitalize()
+				print(arg)
+				query += '_'
+				query += arg
+	query = url + query
+	return query
 
 
 def list_shuffle(target_list):
@@ -276,7 +304,7 @@ def get_references(page_text):
 	return refs
 
 
-def get_html_escapes(page_text)
+def get_html_escapes(page_text):
 	## Return a list of pages text html escapes if they exist, or an empty list.
 	## This is the precursor to the convert_escaped_html() function.
 	## I can see why they did the escapes on certain elements.
@@ -316,7 +344,7 @@ def create_internal_link(link_markup, server_addr, port):
 	if len(link) == 1:
 		text = link
 	elif len(link) == 2:
-		if link[1] == ' ]]'
+		if link[1] == ' ]]':
 			text = link[0]
 		else:
 			text = link[1]

@@ -113,7 +113,7 @@ def main():
 
 	elif page_type(content) == 'Disambiguation':
 		for link in clean_disambiguation(content):
-			print link
+			print(link)
 
 	else:
 		print('We have no idea what went wrong, but you did not manage to fetch a valid page.')
